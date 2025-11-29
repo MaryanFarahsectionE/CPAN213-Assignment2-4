@@ -17,7 +17,7 @@ import { ErrorModal, ConfirmationModal } from '../components/Modals';
 const { width } = Dimensions.get('window');
 const CARD_WIDTH = (width - 48) / 2;
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -111,10 +111,13 @@ export default function HomeScreen() {
   };
 
   const navigateToDetails = () => {
-    if (selectedMovie) {
-      alert(`Movie ID: ${selectedMovie.id}\nTitle: ${selectedMovie.title}\n\nGabriel will create the Details screen!`);
-    }
-  };
+  setShowConfirmModal(false);
+
+  if (selectedMovie) {
+    navigation.navigate("Search", { selectedMovie });
+  }
+};
+
 
   const clearSearch = () => {
     setSearchQuery('');
